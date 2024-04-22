@@ -53,7 +53,7 @@ function displayNextWord() {
         wordEntry.value = "";
 
         if (currentLetter == word.length) {
-            wordEntry.removeEventListener("input", keyHandler);
+            wordEntry.removeEventListener("input", inputHandler);
             display.textContent = "";
             displayNextWord();
         } else {
