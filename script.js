@@ -23,23 +23,23 @@ function displayNextWord() {
     updateLetters();
 
     function inputHandler(e) {
-        console.log(e);
-        if (e.code == "Space" || e.code == "Enter") {
-            e.preventDefault();
-
-            checkGuess();
-        }
+        checkGuess();
     }
-    wordEntry.addEventListener("keypress", inputHandler);
+    wordEntry.addEventListener("input", inputHandler);
 
     function checkGuess() {
         let wanted = NATO_ALPHABET[word[currentLetter]];
+        let had = wordEntry.value.replace(/\W/g, "");
+
+        if(wanted.startsWith(had)) {
+            return undefined;
+        }
 
         let lastLetter = document.createElement("span");
         lastLetter.textContent = word[currentLetter];
         display.insertBefore(lastLetter, focused);
 
-        if (wordEntry.value.replace(/\W/g, "") == wanted) {
+        if (had == wanted) {
             lastLetter.classList.add("word-success-letter");
         } else {
             lastLetter.classList.add("word-error-letter");
@@ -53,7 +53,7 @@ function displayNextWord() {
         wordEntry.value = "";
 
         if (currentLetter == word.length) {
-            wordEntry.removeEventListener("keypress", keyHandler);
+            wordEntry.removeEventListener("input", keyHandler);
             display.textContent = "";
             displayNextWord();
         } else {
