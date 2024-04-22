@@ -29,7 +29,7 @@ function displayNextWord() {
 
     function checkGuess() {
         let wanted = NATO_ALPHABET[word[currentLetter]];
-        let had = wordEntry.value.replace(/\W/g, "");
+        let had = wordEntry.value.replace(/\W/g, "").toLowerCase();
 
         if(wanted.startsWith(had) && wanted != had) {
             return undefined;
