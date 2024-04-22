@@ -22,45 +22,48 @@ function displayNextWord() {
 
     updateLetters();
 
-    wordEntry.addEventListener("keydown", function keyHandler(e) {
-        if(e.code == "Space" || e.code == "Enter") {
+    function keyHandler(e) {
+        if (e.code == "Space" || e.code == "Enter") {
             e.preventDefault();
 
-            let wanted = NATO_ALPHABET[word[currentLetter]];
-
-            let lastLetter = document.createElement("span");
-            lastLetter.textContent = word[currentLetter];
-            display.insertBefore(lastLetter, focused);
-
-            if(wordEntry.value.replace(/\W/g, "") == wanted) {
-                lastLetter.classList.add("word-success-letter");
-            } else {
-                lastLetter.classList.add("word-error-letter");
-            }
-
-            let indicator = document.createElement("span");
-            indicator.textContent = wanted;
-            lastLetter.appendChild(indicator);
-
-            currentLetter++;
-            wordEntry.value = "";
-
-            if(currentLetter == word.length) {
-                wordEntry.removeEventListener("keydown", keyHandler);
-                display.textContent = "";
-                displayNextWord();
-            } else {
-                updateLetters();
-            }
+            checkGuess();
         }
-    })
+    }
+    wordEntry.addEventListener("keyup", keyHandler);
 
+    function checkGuess() {
+        let wanted = NATO_ALPHABET[word[currentLetter]];
+
+        let lastLetter = document.createElement("span");
+        lastLetter.textContent = word[currentLetter];
+        display.insertBefore(lastLetter, focused);
+
+        if (wordEntry.value.replace(/\W/g, "") == wanted) {
+            lastLetter.classList.add("word-success-letter");
+        } else {
+            lastLetter.classList.add("word-error-letter");
+        }
+
+        let indicator = document.createElement("span");
+        indicator.textContent = wanted;
+        lastLetter.appendChild(indicator);
+
+        currentLetter++;
+        wordEntry.value = "";
+
+        if (currentLetter == word.length) {
+            wordEntry.removeEventListener("keyup", keyHandler);
+            display.textContent = "";
+            displayNextWord();
+        } else {
+            updateLetters();
+        }
+    }
 
     function updateLetters() {
         focused.textContent = word[currentLetter];
         yetToCome.textContent = word.substring(currentLetter + 1);
     }
 }
-
 
 displayNextWord();
