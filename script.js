@@ -22,14 +22,15 @@ function displayNextWord() {
 
     updateLetters();
 
-    function keyHandler(e) {
+    function inputHandler(e) {
+        console.log(e);
         if (e.code == "Space" || e.code == "Enter") {
             e.preventDefault();
 
             checkGuess();
         }
     }
-    wordEntry.addEventListener("keyup", keyHandler);
+    wordEntry.addEventListener("keypress", inputHandler);
 
     function checkGuess() {
         let wanted = NATO_ALPHABET[word[currentLetter]];
@@ -52,7 +53,7 @@ function displayNextWord() {
         wordEntry.value = "";
 
         if (currentLetter == word.length) {
-            wordEntry.removeEventListener("keyup", keyHandler);
+            wordEntry.removeEventListener("keypress", keyHandler);
             display.textContent = "";
             displayNextWord();
         } else {
