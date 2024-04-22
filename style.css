@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #311847;
+    color: #E0E2DB;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+main {
+    /* background: #A01A7D; */
+}
+
+
+.word-display {
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+.word-entry {
+
+}
+
+.word-focused-letter {
+
+}
+
+.word-display > span {
+    position: relative;
+}
+
+.word-display > span > span {
+    /*! writing-mode: sideways-lr; */
+    position: absolute;
+    bottom: 90%;
+    left: 70%;
+    font-size: 0.9rem;
+    transform: rotate(-60deg);
+    transform-origin: bottom left;
+}
+.word-yet-to-come {
+    color: #E0ACD5;
+}
+
+.word-error-letter {
+    color: #EC4067;
+}
+
+.word-display .word-success-letter {
+    color: #ACD265;
+}
