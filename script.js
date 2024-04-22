@@ -31,7 +31,7 @@ function displayNextWord() {
         let wanted = NATO_ALPHABET[word[currentLetter]];
         let had = wordEntry.value.replace(/\W/g, "");
 
-        if(wanted.startsWith(had)) {
+        if(wanted.startsWith(had) && wanted != had) {
             return undefined;
         }
 
